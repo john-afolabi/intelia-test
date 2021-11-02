@@ -24,6 +24,12 @@ interface Car extends DefaultAttribs {
   year: number;
 }
 
+interface Booking extends DefaultAttribs {
+  userId: string;
+  carId: string;
+  isActive: boolean;
+}
+
 type Models = {
   [key: string]: ModelCtor<any>;
 };

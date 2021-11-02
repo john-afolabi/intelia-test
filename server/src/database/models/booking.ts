@@ -1,13 +1,15 @@
-import { Models, User } from '../../types';
+import { Models, Booking } from '../../types';
 import { Model, Sequelize, DataTypes, Optional } from 'sequelize';
 
-interface UserCreationAttributes extends Optional<User, 'id'> {}
+interface BookingCreationAttributes extends Optional<Booking, 'id'> {}
 
-interface UserInstance extends Model<User, UserCreationAttributes>, User {}
+interface BookingInstance
+  extends Model<Booking, BookingCreationAttributes>,
+    Booking {}
 
-export default function UserModel(sequelize: Sequelize) {
-  const user = sequelize.define<UserInstance>(
-    'users',
+export default function BookingModel(sequelize: Sequelize) {
+  const booking = sequelize.define<BookingInstance>(
+    'bookings',
     {
       id: {
         unique: true,
@@ -21,21 +23,18 @@ export default function UserModel(sequelize: Sequelize) {
           },
         },
       },
-      name: {
+      userId: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
       },
-      email: {
+      carId: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
       },
-      phone: {
+      isActive: {
         allowNull: false,
-        type: DataTypes.STRING,
-      },
-      password: {
-        allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -60,10 +59,22 @@ export default function UserModel(sequelize: Sequelize) {
    * The `models/index` file will call this method automatically.
    */
   // @ts-ignore
-  user.associate = function (models: Models) {
+  booking.associate = (models: Models) => {
     // associations can be defined here
-    user.hasMany(models.bookings);
+    booking.belongsTo(models.cars, {
+      as: 'car',
+      foreignKey: 'carId',
+      onDelete: 'CASCADE',
+      constraints: false,
+    });
+
+    booking.belongsTo(models.users, {
+      as: 'user',
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
+      constraints: false,
+    });
   };
 
-  return user;
+  return booking;
 }

@@ -60,9 +60,8 @@ export default function CarModel(sequelize: Sequelize) {
    * The `models/index` file will call this method automatically.
    */
   // @ts-ignore
-  car.associate = function (models: Models) {
-    // associations can be defined here
-    // e.g models.user.hasMany(models.accounts);
+  car.associate = (models: Models) => {
+    car.hasMany(models.bookings);
   };
 
   return car;

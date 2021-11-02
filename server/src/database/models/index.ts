@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 import dbconfig from '../config/config';
 import UserModel from './user';
 import CarModel from './car';
+import BookingModel from './booking';
 
 const { NODE_ENV = 'development' } = process.env;
 
@@ -27,6 +28,7 @@ const db = {
   // Doing this manually to enable auto complete when destructuring
   user: UserModel(sequelize),
   car: CarModel(sequelize),
+  booking: BookingModel(sequelize),
 };
 
 Object.keys(db).forEach((modelName) => {
