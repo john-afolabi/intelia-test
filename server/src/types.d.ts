@@ -10,18 +10,29 @@ interface DefaultAttribs {
 
 type ExcludedAttribs = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
 
-interface User extends DefaultAttribs{
+interface User extends DefaultAttribs {
   name: string;
   email: string;
   phone: string;
   password: string;
 }
 
+interface Car extends DefaultAttribs {
+  brand: string;
+  model: string;
+  color: string;
+  year: number;
+}
+
 type Models = {
   [key: string]: ModelCtor<any>;
 };
 
-type CreateErr = (message: string, code?: number, validations?: object) => Error;
+type CreateErr = (
+  message: string,
+  code?: number,
+  validations?: object
+) => Error;
 
 type AuthenticatedRequest = Request & {
   user: User;
