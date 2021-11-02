@@ -1,15 +1,20 @@
 import { Request } from 'express';
 import { ModelCtor } from 'sequelize';
 
-interface User {
-  id?: string;
+interface DefaultAttribs {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
+}
+
+type ExcludedAttribs = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
+
+interface User extends DefaultAttribs{
   name: string;
   email: string;
   phone: string;
   password: string;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string;
 }
 
 type Models = {

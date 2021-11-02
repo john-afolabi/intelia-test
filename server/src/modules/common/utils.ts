@@ -6,7 +6,11 @@ import { validationResult } from 'express-validator';
 
 import { AppError, CreateErr, User, AuthenticatedRequest } from '../../types';
 
-export const createError: CreateErr = (message, code = 403, validations = null) => {
+export const createError: CreateErr = (
+  message,
+  code = 403,
+  validations = null
+) => {
   const err = new Error(message);
   // @ts-ignore
   err.code = code;
@@ -22,7 +26,11 @@ export const success = (msg: string, data: any, meta?: object) => ({
   ...(meta && { meta }),
 });
 
-export async function Authenticate(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export async function Authenticate(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) {
   try {
     if (req.user) {
       return next();
@@ -44,7 +52,25 @@ export async function Authenticate(req: AuthenticatedRequest, res: Response, nex
   }
 }
 
-export function errorHandler(error: AppError, req: any, res: Response, _next: any) {
+export const AuthenticateUser = (params) => {
+  jwt.sign(
+    {
+      id: params.id,
+    },
+    process.env.AUTH_SECRET,
+    (err, token) => {
+      if (err) throw err;
+      return token;
+    }
+  );
+};
+
+export function errorHandler(
+  error: AppError,
+  req: any,
+  res: Response,
+  _next: any
+) {
   try {
     if (error.validations) {
       return res.status(422).json({
@@ -80,13 +106,21 @@ export function errorHandler(error: AppError, req: any, res: Response, _next: an
   }
 }
 
-export const forwardRequest = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const forwardRequest = (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const { app } = req;
   // eslint-disable-next-line no-underscore-dangle
   return app._router.handle(req, res, next);
 };
 
-export const validate = (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
+export const validate = (
+  req: AuthenticatedRequest,
+  _res: Response,
+  next: NextFunction
+) => {
   try {
     const errors = validationResult(req);
 

@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 import dbconfig from '../config/config';
-import UserModel from './userSample';
+import UserModel from './user';
 
 const { NODE_ENV = 'development' } = process.env;
 
