@@ -3,7 +3,7 @@ import { Model, Sequelize, DataTypes, Optional } from 'sequelize';
 
 interface BookingCreationAttributes extends Optional<Booking, 'id'> {}
 
-interface BookingInstance
+export interface BookingInstance
   extends Model<Booking, BookingCreationAttributes>,
     Booking {}
 

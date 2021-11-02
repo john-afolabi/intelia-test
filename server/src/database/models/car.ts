@@ -3,7 +3,7 @@ import { Model, Sequelize, DataTypes, Optional } from 'sequelize';
 
 interface CarCreationAttributes extends Optional<Car, 'id'> {}
 
-interface CarInstance extends Model<Car, CarCreationAttributes>, Car {}
+export interface CarInstance extends Model<Car, CarCreationAttributes>, Car {}
 
 export default function CarModel(sequelize: Sequelize) {
   const car = sequelize.define<CarInstance>(

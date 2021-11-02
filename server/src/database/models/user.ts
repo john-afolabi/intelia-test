@@ -27,6 +27,7 @@ export default function UserModel(sequelize: Sequelize) {
       },
       email: {
         allowNull: false,
+        unique: true,
         type: DataTypes.STRING,
       },
       phone: {

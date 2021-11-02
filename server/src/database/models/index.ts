@@ -26,9 +26,9 @@ const db = {
   Sequelize,
   // Add models here e.g cards: cards(sequelize)
   // Doing this manually to enable auto complete when destructuring
-  user: UserModel(sequelize),
-  car: CarModel(sequelize),
-  booking: BookingModel(sequelize),
+  users: UserModel(sequelize),
+  cars: CarModel(sequelize),
+  bookings: BookingModel(sequelize),
 };
 
 Object.keys(db).forEach((modelName) => {
