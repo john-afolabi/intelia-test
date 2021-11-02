@@ -1,11 +1,9 @@
-import { User, ExcludedAttribs } from '../../../types';
+import { User } from '../../../types';
 import { createError, AuthenticateUser } from '../../common/utils';
 import db from '../../../database/models';
 
-type Props = Omit<User, ExcludedAttribs>;
-
 export default class Users {
-  model = db.user;
+  model = db.users;
 
   private id;
 
@@ -19,11 +17,15 @@ export default class Users {
         where: {
           email: params.email,
         },
-        attributes: { exclude: ['password'] },
+        attributes: {
+          exclude: ['password', 'updatedAt', 'createdAt', 'deletedAt'],
+        },
       })
       .catch((e) => {
-        throw createError('Invalid Email', 404);
+        throw e;
       });
+
+    if (!user) throw createError('Invalid Email', 404);
 
     const token = AuthenticateUser({ id: user.id });
     return { token, user };

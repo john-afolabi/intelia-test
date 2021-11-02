@@ -53,16 +53,13 @@ export async function Authenticate(
 }
 
 export const AuthenticateUser = (params) => {
-  jwt.sign(
+  const token = jwt.sign(
     {
       id: params.id,
     },
-    process.env.AUTH_SECRET,
-    (err, token) => {
-      if (err) throw err;
-      return token;
-    }
+    process.env.AUTH_SECRET
   );
+  return token;
 };
 
 export function errorHandler(
@@ -98,7 +95,7 @@ export function errorHandler(
     console.log(error.name || 'Error', error.message);
 
     captureException(error);
-    req.transaction.finish();
+    req?.transaction?.finish();
     return res.status(code || 500).json({ status: false, message: msg });
   } catch (e) {
     console.log(e);
