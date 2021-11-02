@@ -18,7 +18,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon -r dotenv/config src/index.ts",
     "start": "node build/index.js",
     "migrate": "yarn sequelize-cli db:migrate",
     "migrate:u": "yarn sequelize-cli db:migrate:undo",
