@@ -30,6 +30,8 @@ export default class Bookings {
         where: {
           userId: this.userId,
         },
+        include: { as: 'car', model: db.cars },
+        attributes: { exclude: ['carId', 'userId'] },
       })
       .catch((e) => {
         throw e;
