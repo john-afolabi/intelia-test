@@ -13,19 +13,15 @@ type CarProps = {
 
 const { Meta } = Card;
 const Car = ({ id, brand, model, year, color }: CarProps) => {
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const { mutateAsync: bookCar } = useBookCar();
+  const { mutateAsync: bookCar, isLoading } = useBookCar();
 
   const onBookCar = async (carId: string) => {
     try {
-      setLoading(true);
       await bookCar(carId);
       notification.success({ message: 'Booking successful' });
     } catch (error) {
       notification.error({ message: 'Booking failed' });
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -51,7 +47,7 @@ const Car = ({ id, brand, model, year, color }: CarProps) => {
         className="t-lg"
         block
         onClick={() => onBookCar(id)}
-        loading={loading}
+        loading={isLoading}
       >
         Book Car
       </Button>

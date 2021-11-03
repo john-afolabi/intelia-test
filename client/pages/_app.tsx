@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AuthProvider } from '../utils/auth';
+import { RouteGuard } from '../components/RouteGuard';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -12,7 +13,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <AuthProvider>
-          <Component {...pageProps} />
+          {/* @ts-ignore */}
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
         </AuthProvider>
       </Hydrate>
       <ReactQueryDevtools />
