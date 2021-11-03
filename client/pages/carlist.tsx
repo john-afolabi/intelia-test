@@ -49,7 +49,13 @@ const Carlist: NextPage = () => {
             {filteredCars?.map(({ id, brand, color, model, year }) => {
               return (
                 <Col key={id}>
-                  <Car brand={brand} color={color} model={model} year={year} />
+                  <Car
+                    id={id}
+                    brand={brand}
+                    color={color}
+                    model={model}
+                    year={year}
+                  />
                 </Col>
               );
             })}
