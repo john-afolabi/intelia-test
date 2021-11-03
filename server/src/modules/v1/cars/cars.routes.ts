@@ -3,6 +3,7 @@ import { AuthenticatedRequest } from '../../../types';
 import { Authenticate, success, validate } from '../../common/utils';
 import Bookings from '../bookings/bookings.service';
 import Cars from './cars.service';
+import { createBookingRules } from './cars.validators';
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.get(
 router.post(
   '/book/:id',
   Authenticate,
+  createBookingRules(),
   validate,
   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {

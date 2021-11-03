@@ -3,7 +3,7 @@ import { AuthenticatedRequest } from '../../../types';
 import { Authenticate, success, validate } from '../../common/utils';
 import Bookings from '../bookings/bookings.service';
 import Users from './users.service';
-import { loginAccountRules, createBookingRules } from './users.validators';
+import { loginAccountRules } from './users.validators';
 
 const router = Router();
 
