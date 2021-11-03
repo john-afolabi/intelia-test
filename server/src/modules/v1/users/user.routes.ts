@@ -7,6 +7,24 @@ import { loginAccountRules, createBookingRules } from './users.validators';
 
 const router = Router();
 
+// Get user info
+router.get(
+  '/',
+  Authenticate,
+  validate,
+  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+      const { id: userId } = req.user;
+
+      const user = await new Users(userId).findUser();
+
+      return res.status(200).json(success('User retrieved successfully', user));
+    } catch (e) {
+      return next(e);
+    }
+  }
+);
+
 // Login account
 router.post(
   '/login',
