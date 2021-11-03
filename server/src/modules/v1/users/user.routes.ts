@@ -63,26 +63,4 @@ router.get(
   }
 );
 
-// Create new bookings
-router.post(
-  '/booking',
-  Authenticate,
-  createBookingRules(),
-  validate,
-  async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    try {
-      const { id: userId } = req.user;
-      const { carId } = req.body;
-
-      const booking = await new Bookings().createBooking({ userId, carId });
-
-      return res
-        .status(200)
-        .json(success('Booking created Successful', booking));
-    } catch (e) {
-      return next(e);
-    }
-  }
-);
-
 export default router;
