@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from 'react-query';
 import { http } from '../utils/main';
 import { notification } from 'antd';
 
-type Car = {
+export type Car = {
   id: string;
   color: string;
   brand: string;

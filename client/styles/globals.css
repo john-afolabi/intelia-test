@@ -14,3 +14,122 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Spacing styles */
+.t-sm {
+  margin-top: 4px;
+  padding: 0.05px;
+}
+
+.t-md {
+  margin-top: 8px;
+  padding: 0.05px;
+}
+
+.t-lg {
+  margin-top: 16px;
+  padding: 0.05px;
+}
+
+.t-xl {
+  margin-top: 32px;
+  padding: 0.05px;
+}
+
+.b-sm {
+  margin-bottom: 4px;
+  padding: 0.05px;
+}
+
+.b-md {
+  margin-bottom: 8px;
+  padding: 0.05px;
+}
+
+.b-lg {
+  margin-bottom: 16px;
+  padding: 0.05px;
+}
+
+.b-xl {
+  margin-bottom: 32px;
+  padding: 0.05px;
+}
+
+.h-sm {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 0.05px;
+}
+
+.h-md {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 0.05px;
+}
+
+.h-lg {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 0.05px;
+}
+
+.h-xl {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 0.05px;
+}
+
+.v-sm {
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 0.05px;
+}
+
+.v-md {
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0.05px;
+}
+
+.v-lg {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 0.05px;
+}
+
+.v-xl {
+  margin-left: 32px;
+  margin-right: 32px;
+  padding: 0.05px;
+}
+
+.r-sm {
+  margin-right: 4px;
+  padding: 0.05px;
+}
+
+.r-md {
+  margin-right: 8px;
+  padding: 0.05px;
+}
+
+.r-lg {
+  margin-right: 16px;
+  padding: 0.05px;
+}
+
+.l-sm {
+  margin-left: 4px;
+  padding: 0.05px;
+}
+
+.l-md {
+  margin-left: 8px;
+  padding: 0.05px;
+}
+
+.l-lg {
+  margin-left: 16px;
+  padding: 0.05px;
+}

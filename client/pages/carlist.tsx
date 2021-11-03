@@ -1,17 +1,34 @@
+import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Car from '../components/Car';
-import useCars from '../hooks/useCars';
+import useCars, { Car as CarType } from '../hooks/useCars';
 import styles from '../styles/Home.module.css';
-import { Typography, Row, Col } from 'antd';
-import { useAuth } from '../utils/auth';
+import { Typography, Row, Col, Input } from 'antd';
 
 const { Title } = Typography;
 
+const { Search } = Input;
+
 const Carlist: NextPage = () => {
   const { data: cars, isLoading } = useCars();
+  const [filteredCars, setFilteredCars] = React.useState<CarType[]>([]);
+
+  const onSearch = (value: string | number) => {
+    const filtered = cars?.filter(({ model }) =>
+      model.toLocaleLowerCase().includes(value.toString().toLocaleLowerCase())
+    );
+    //@ts-ignore
+    setFilteredCars(filtered);
+  };
+
+  React.useEffect(() => {
+    //@ts-ignore
+    if (!isLoading) setFilteredCars(cars);
+  }, [isLoading, cars]);
 
   if (isLoading) return <p>Loading...</p>;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,15 +38,23 @@ const Carlist: NextPage = () => {
 
       <main className={styles.main}>
         <Title level={1}>Car List</Title>
-        <Row align="middle" justify="center" gutter={32}>
-          {cars?.map(({ id, brand, color, model, year }) => {
-            return (
-              <Col key={id}>
-                <Car brand={brand} color={color} model={model} year={year} />
-              </Col>
-            );
-          })}
-        </Row>
+
+        <Search
+          placeholder="Search cars"
+          onSearch={onSearch}
+          style={{ width: 300 }}
+        />
+        <div className="t-xl">
+          <Row align="middle" justify="center" gutter={32}>
+            {filteredCars?.map(({ id, brand, color, model, year }) => {
+              return (
+                <Col key={id}>
+                  <Car brand={brand} color={color} model={model} year={year} />
+                </Col>
+              );
+            })}
+          </Row>
+        </div>
       </main>
     </div>
   );
