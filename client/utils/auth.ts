@@ -31,6 +31,7 @@ const authConfig = {
   loginFn,
   registerFn,
   logoutFn,
+  waitInitial: false,
 };
 
 const { AuthProvider, useAuth } = initReactQueryAuth(authConfig);

@@ -7,16 +7,23 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { AuthProvider } from '../utils/auth';
 import { RouteGuard } from '../components/RouteGuard';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+type AppComponentType = AppProps['Component'] & {
+  getLayout?: (a: React.ReactNode) => React.ReactNode;
+};
+
+export default function MyApp({
+  Component,
+  pageProps,
+}: AppProps & { Component: AppComponentType }) {
   const [queryClient] = React.useState(() => new QueryClient());
+  const getLayout =
+    Component.getLayout ?? ((page: React.ReactNode): React.ReactNode => page);
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <AuthProvider>
           {/* @ts-ignore */}
-          <RouteGuard>
-            <Component {...pageProps} />
-          </RouteGuard>
+          <RouteGuard>{getLayout(<Component {...pageProps} />)}</RouteGuard>
         </AuthProvider>
       </Hydrate>
       <ReactQueryDevtools />

@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import Carlist from '../components/CarList';
+import { getBaseLayout } from '../layouts/base';
 
-const Home: NextPage = () => {
+const Home = (): React.ReactNode => {
   return (
     <>
       <Head>
@@ -14,5 +14,7 @@ const Home: NextPage = () => {
     </>
   );
 };
+
+Home.getLayout = getBaseLayout;
 
 export default Home;

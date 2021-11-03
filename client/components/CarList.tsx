@@ -2,6 +2,7 @@ import React from 'react';
 import Car from '../components/Car';
 import useCars, { Car as CarType } from '../hooks/useCars';
 import { Typography, Row, Col, Input } from 'antd';
+import Spinner from './Spinner';
 
 const { Title } = Typography;
 
@@ -24,8 +25,6 @@ const Carlist = () => {
     if (!isLoading) setFilteredCars(cars);
   }, [isLoading, cars]);
 
-  if (isLoading) return <p>Loading...</p>;
-
   return (
     <main className="main">
       <Title level={1}>Car List</Title>
@@ -36,20 +35,24 @@ const Carlist = () => {
         style={{ width: 300 }}
       />
       <div className="t-xl">
-        <Row align="middle" justify="center" gutter={32}>
-          {filteredCars?.map(({ id, brand, color, model, year }) => {
-            return (
-              <Col key={id}>
-                <Car
-                  id={id}
-                  brand={brand}
-                  color={color}
-                  model={model}
-                  year={year}
-                />
-              </Col>
-            );
-          })}
+        <Row align="middle" justify="center" gutter={[32, 32]}>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            filteredCars?.map(({ id, brand, color, model, year }) => {
+              return (
+                <Col key={id}>
+                  <Car
+                    id={id}
+                    brand={brand}
+                    color={color}
+                    model={model}
+                    year={year}
+                  />
+                </Col>
+              );
+            })
+          )}
         </Row>
       </div>
     </main>
