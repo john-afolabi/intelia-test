@@ -30,12 +30,7 @@ const Login = (): React.ReactElement => {
 
   return (
     <main className="main">
-      <Form
-        name="login"
-        onFinish={onFinish}
-        autoComplete="off"
-        style={{ width: '400px' }}
-      >
+      <Form name="login" onFinish={onFinish} style={{ width: '400px' }}>
         <Form.Item
           name="email"
           rules={[
@@ -48,6 +43,7 @@ const Login = (): React.ReactElement => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
+            type="email"
           />
         </Form.Item>
 

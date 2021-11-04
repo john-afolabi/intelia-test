@@ -38,7 +38,7 @@ const Carlist = () => {
         <Row align="middle" justify="center" gutter={[32, 32]}>
           {isLoading ? (
             <Spinner />
-          ) : (
+          ) : filteredCars.length ? (
             filteredCars?.map(({ id, brand, color, model, year }) => {
               return (
                 <Col key={id}>
@@ -52,6 +52,8 @@ const Carlist = () => {
                 </Col>
               );
             })
+          ) : (
+            <p>There are no cars</p>
           )}
         </Row>
       </div>

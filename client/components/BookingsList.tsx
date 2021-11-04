@@ -17,7 +17,7 @@ const Bookings = () => {
         <Row align="middle" justify="center" gutter={[32, 32]}>
           {isLoading || isRefetching ? (
             <Spinner />
-          ) : (
+          ) : bookings?.length ? (
             bookings?.map(({ id, isActive, createdAt, car }) => {
               return (
                 <Col key={id}>
@@ -29,6 +29,8 @@ const Bookings = () => {
                 </Col>
               );
             })
+          ) : (
+            <p>You have no bookings</p>
           )}
         </Row>
       </div>

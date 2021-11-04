@@ -16,7 +16,7 @@ const fetchBookings = async () => {
     console.log(err);
     notification.error({ message: 'Error fetching bookings' });
   });
-  return res?.data?.data;
+  return res?.data?.data?.bookings;
 };
 
 export default function useBookings(): UseQueryResult<Booking[]> {
