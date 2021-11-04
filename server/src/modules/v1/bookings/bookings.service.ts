@@ -1,4 +1,3 @@
-import { createError } from '../../common/utils';
 import db from '../../../database/models';
 import { BookingInstance } from '../../../database/models/booking';
 
@@ -37,20 +36,14 @@ export default class Bookings {
         throw e;
       });
 
-    if (bookings.count) {
-      return bookings.rows;
-    }
-
-    throw createError('User has no bookings', 404);
+    return { count: bookings.count, bookings: bookings.rows };
   }
 
   public async getAllBookings() {
     const bookings = await this.model.findAndCountAll().catch((e) => {
       throw e;
     });
-    if (bookings.count) {
-      return bookings.rows;
-    }
-    throw createError('There is no bookings', 404);
+
+    return { count: bookings.count, bookings: bookings.rows };
   }
 }
