@@ -49,7 +49,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps): JSX.Element => {
         </>
       )}
 
-      <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+      <Menu theme="light" mode="inline">
         <Menu.Item key="1" icon={<OrderedListOutlined />}>
           <Link href="/">
             <a>Cars List</a>
